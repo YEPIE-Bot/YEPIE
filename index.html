@@ -3,116 +3,189 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>YEPIE Bot - Your Ultimate Discord Companion</title>
+<title>YEPIE Bot — Advanced Discord Bot</title>
 <style>
-  /* Reset & base */
-  * {
+  /* Reset and base */
+  *, *::before, *::after {
     box-sizing: border-box;
   }
   body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #121212;
-    color: #ddd;
+    color: #e0e0e0;
     line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   a {
     color: #0099ff;
     text-decoration: none;
+    transition: color 0.3s ease;
   }
-  a:hover {
-    text-decoration: underline;
+  a:hover, a:focus {
+    color: #007acc;
+    outline: none;
   }
+
+  /* Header */
   header {
-    background-color: #0a68c1;
-    padding: 1rem 2rem;
+    background-color: #0b72d1;
+    padding: 1.25rem 3rem;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    box-shadow: 0 2px 8px rgba(0,153,255,0.3);
+    align-items: center;
+    box-shadow: 0 3px 8px rgba(0, 153, 255, 0.25);
+    position: sticky;
+    top: 0;
+    z-index: 999;
   }
   header h1 {
     margin: 0;
-    font-weight: 700;
-    font-size: 1.8rem;
+    font-weight: 800;
+    font-size: 1.9rem;
     color: #fff;
     letter-spacing: 2px;
+    user-select: none;
   }
   nav a {
-    margin-left: 1.5rem;
+    margin-left: 2rem;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 1.05rem;
+    padding-bottom: 3px;
+    position: relative;
     cursor: pointer;
   }
-  nav a.active {
-    border-bottom: 2px solid #0099ff;
+  nav a.active,
+  nav a:hover,
+  nav a:focus {
+    color: #ffffff;
+  }
+  nav a.active::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background-color: #0099ff;
+    bottom: 0;
+    left: 0;
+    border-radius: 2px;
   }
 
+  /* Main container */
   main {
     max-width: 900px;
-    margin: 2rem auto 4rem;
-    padding: 0 1rem;
+    margin: 3rem auto 6rem;
+    padding: 0 2rem;
   }
   section {
-    margin-bottom: 3rem;
+    animation: fadeIn 0.5s ease forwards;
   }
+  @keyframes fadeIn {
+    from {opacity: 0; transform: translateY(10px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+
+  /* Section titles */
   h2 {
+    font-weight: 700;
+    font-size: 2rem;
     color: #0099ff;
-    border-bottom: 2px solid #0099ff;
-    padding-bottom: 0.3rem;
-    margin-bottom: 1rem;
+    border-bottom: 3px solid #0099ff;
+    padding-bottom: 0.4rem;
+    margin-bottom: 1.5rem;
+    user-select: none;
+  }
+
+  /* Paragraphs */
+  p {
+    font-size: 1.1rem;
+    color: #cfd8dc;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Lists */
+  ul {
+    list-style: disc inside;
+    margin-left: 1rem;
+    color: #b0bec5;
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
   }
 
   /* Buttons */
   .btn {
-    display: inline-block;
     background-color: #0099ff;
     color: #121212;
-    padding: 0.6rem 1.5rem;
-    font-weight: 700;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
     border: none;
-    text-align: center;
+    padding: 0.75rem 2.25rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(0,153,255,0.3);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    user-select: none;
+    display: inline-block;
   }
-  .btn:hover {
+  .btn:hover, .btn:focus {
     background-color: #007acc;
+    box-shadow: 0 8px 18px rgba(0,118,204,0.5);
+    outline: none;
   }
 
   /* Footer */
   footer {
+    background-color: #0b72d1;
+    color: #f0f0f0;
     text-align: center;
-    padding: 1.5rem 1rem;
-    background-color: #0a68c1;
-    color: #fff;
     font-size: 0.9rem;
+    padding: 1.5rem 1rem;
     position: fixed;
-    width: 100%;
     bottom: 0;
+    width: 100%;
+    user-select: none;
+    box-shadow: 0 -3px 8px rgba(0, 153, 255, 0.25);
   }
 
   /* Commands styling */
   .commands-section pre {
-    background-color: #1e1e1e;
-    border-left: 4px solid #0099ff;
-    padding: 1rem;
+    background-color: #1f2937;
+    border-left: 5px solid #0099ff;
+    padding: 1.4rem 2rem;
+    font-family: 'Fira Mono', monospace, monospace;
+    font-size: 1rem;
+    color: #a5d8ff;
+    border-radius: 8px;
+    overflow-x: auto;
     white-space: pre-wrap;
-    font-family: 'Courier New', Courier, monospace;
-    color: #a0d8ff;
-    border-radius: 6px;
+    line-height: 1.4;
+    user-select: text;
   }
 
-  /* Responsive nav for mobile */
-  @media (max-width: 600px) {
+  /* Responsive nav */
+  @media (max-width: 700px) {
+    header {
+      padding: 1rem 1.5rem;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.7rem;
+    }
     nav {
+      width: 100%;
       display: flex;
+      justify-content: flex-start;
       flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 0.5rem;
     }
     nav a {
-      margin: 0.5rem 1rem 0.5rem 0;
+      margin-left: 0;
+      margin-right: 1.5rem;
+      padding-bottom: 6px;
+      font-size: 1rem;
+    }
+    main {
+      margin: 2.5rem auto 8rem;
+      padding: 0 1.5rem;
     }
   }
 </style>
@@ -122,7 +195,7 @@
 <header>
   <h1>YEPIE Bot</h1>
   <nav>
-    <a href="#home" class="active" onclick="navigate(event)">Home</a>
+    <a href="#home" class="active" onclick="navigate(event)" aria-current="page">Home</a>
     <a href="#commands" onclick="navigate(event)">Commands</a>
     <a href="#leveling" onclick="navigate(event)">Leveling</a>
     <a href="#invite" onclick="navigate(event)">Invite</a>
@@ -130,13 +203,13 @@
 </header>
 
 <main>
-  <section id="home-section">
+  <section id="home-section" role="region" aria-label="Home">
     <h2>Welcome to YEPIE Bot</h2>
     <p>YEPIE is an advanced and free Discord bot packed with useful features and easy-to-use commands. Whether you want leveling systems, moderation, giveaways, or invite tracking, YEPIE has you covered. Join thousands of servers and enhance your Discord experience today!</p>
-    <button class="btn" onclick="copyInvite()">Copy Invite Link</button>
+    <button class="btn" onclick="copyInvite()" aria-label="Copy YEPIE bot invite link">Copy Invite Link</button>
   </section>
 
-  <section id="commands-section" style="display:none;">
+  <section id="commands-section" role="region" aria-label="Commands" style="display:none;">
     <h2>Commands</h2>
     <pre>
 **MODERATION**
@@ -171,7 +244,7 @@
     </pre>
   </section>
 
-  <section id="leveling-section" style="display:none;">
+  <section id="leveling-section" role="region" aria-label="Leveling" style="display:none;">
     <h2>Leveling System</h2>
     <p>YEPIE offers an advanced leveling system that rewards your active members with XP and ranks. Customize messages, levels, and rewards to keep your community engaged.</p>
     <ul>
@@ -182,15 +255,15 @@
     </ul>
   </section>
 
-  <section id="invite-section" style="display:none;">
+  <section id="invite-section" role="region" aria-label="Invite" style="display:none;">
     <h2>Invite YEPIE to Your Server</h2>
     <p>Click the button below to invite YEPIE to your Discord server and unlock all features!</p>
-    <button class="btn" onclick="window.open('https://discord.com/oauth2/authorize?client_id=1379441584575221902&scope=bot+applications.commands&permissions=8', '_blank')">Invite YEPIE</button>
+    <button class="btn" onclick="window.open('https://discord.com/oauth2/authorize?client_id=1379441584575221902&scope=bot+applications.commands&permissions=8', '_blank')" aria-label="Invite YEPIE bot to your Discord server">Invite YEPIE</button>
   </section>
 </main>
 
 <footer>
-  &copy; 2025 YEPIE Bot. Made with &#10084; for Discord communities.
+  &copy; 2025 YEPIE Bot. Crafted with care for Discord communities.
 </footer>
 
 <script>
@@ -198,33 +271,59 @@
   function navigate(e) {
     e.preventDefault();
     const links = document.querySelectorAll('nav a');
-    links.forEach(link => link.classList.remove('active'));
+    links.forEach(link => {
+      link.classList.remove('active');
+      link.removeAttribute('aria-current');
+    });
     e.target.classList.add('active');
+    e.target.setAttribute('aria-current', 'page');
 
     const sections = {
-      'home': 'home-section',
-      'commands': 'commands-section',
-      'leveling': 'leveling-section',
-      'invite': 'invite-section'
+      home: 'home-section',
+      commands: 'commands-section',
+      leveling: 'leveling-section',
+      invite: 'invite-section'
     };
 
-    for (const key in sections) {
-      document.getElementById(sections[key]).style.display = 'none';
-    }
-    const targetSection = sections[e.target.getAttribute('href').substring(1)];
-    if (targetSection) {
-      document.getElementById(targetSection).style.display = 'block';
+    Object.values(sections).forEach(id => {
+      document.getElementById(id).style.display = 'none';
+    });
+
+    const targetId = sections[e.target.getAttribute('href').substring(1)];
+    if (targetId) {
+      document.getElementById(targetId).style.display = 'block';
+      document.getElementById(targetId).focus();
     }
   }
 
   // Copy invite link to clipboard
   function copyInvite() {
     const inviteUrl = 'https://discord.com/oauth2/authorize?client_id=1379441584575221902&scope=bot+applications.commands&permissions=8';
-    navigator.clipboard.writeText(inviteUrl).then(() => {
-      alert('Invite link copied to clipboard!');
-    }).catch(() => {
-      alert('Failed to copy the invite link. Please copy manually: ' + inviteUrl);
-    });
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(inviteUrl).then(() => {
+        alert('Invite link copied to clipboard!');
+      }).catch(() => {
+        fallbackCopy(inviteUrl);
+      });
+    } else {
+      fallbackCopy(inviteUrl);
+    }
+  }
+  function fallbackCopy(text) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.left = '-9999px';
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+    try {
+      const successful = document.execCommand('copy');
+      alert(successful ? 'Invite link copied to clipboard!' : 'Failed to copy the invite link.');
+    } catch {
+      alert('Failed to copy the invite link.');
+    }
+    document.body.removeChild(textarea);
   }
 </script>
 
