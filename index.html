@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>YEPIE Bot - Your Ultimate Discord Companion</title>
+<style>
+  /* Reset & base */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121212;
+    color: #ddd;
+    line-height: 1.6;
+  }
+  a {
+    color: #0099ff;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  header {
+    background-color: #0a68c1;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(0,153,255,0.3);
+  }
+  header h1 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #fff;
+    letter-spacing: 2px;
+  }
+  nav a {
+    margin-left: 1.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  nav a.active {
+    border-bottom: 2px solid #0099ff;
+  }
+
+  main {
+    max-width: 900px;
+    margin: 2rem auto 4rem;
+    padding: 0 1rem;
+  }
+  section {
+    margin-bottom: 3rem;
+  }
+  h2 {
+    color: #0099ff;
+    border-bottom: 2px solid #0099ff;
+    padding-bottom: 0.3rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-block;
+    background-color: #0099ff;
+    color: #121212;
+    padding: 0.6rem 1.5rem;
+    font-weight: 700;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none;
+    text-align: center;
+  }
+  .btn:hover {
+    background-color: #007acc;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    background-color: #0a68c1;
+    color: #fff;
+    font-size: 0.9rem;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+  }
+
+  /* Commands styling */
+  .commands-section pre {
+    background-color: #1e1e1e;
+    border-left: 4px solid #0099ff;
+    padding: 1rem;
+    white-space: pre-wrap;
+    font-family: 'Courier New', Courier, monospace;
+    color: #a0d8ff;
+    border-radius: 6px;
+  }
+
+  /* Responsive nav for mobile */
+  @media (max-width: 600px) {
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 0.5rem;
+    }
+    nav a {
+      margin: 0.5rem 1rem 0.5rem 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>YEPIE Bot</h1>
+  <nav>
+    <a href="#home" class="active" onclick="navigate(event)">Home</a>
+    <a href="#commands" onclick="navigate(event)">Commands</a>
+    <a href="#leveling" onclick="navigate(event)">Leveling</a>
+    <a href="#invite" onclick="navigate(event)">Invite</a>
+  </nav>
+</header>
+
+<main>
+  <section id="home-section">
+    <h2>Welcome to YEPIE Bot</h2>
+    <p>YEPIE is an advanced and free Discord bot packed with useful features and easy-to-use commands. Whether you want leveling systems, moderation, giveaways, or invite tracking, YEPIE has you covered. Join thousands of servers and enhance your Discord experience today!</p>
+    <button class="btn" onclick="copyInvite()">Copy Invite Link</button>
+  </section>
+
+  <section id="commands-section" style="display:none;">
+    <h2>Commands</h2>
+    <pre>
+**MODERATION**
+> • COMMAND: `ban` — USAGE: `?ban [user] [reason]`
+> • COMMAND: `unban` — USAGE: `?unban [user] [case]`
+> • COMMAND: `kick` — USAGE: `?kick [user] [reason]`
+> • COMMAND: `mute` — USAGE: `?mute [user] [reason]`
+> • COMMAND: `unmute` — USAGE: `?unmute [user] [case]`
+> • COMMAND: `warn` — USAGE: `?warn [user] [reason]`
+> • COMMAND: `unwarn` — USAGE: `?unwarn [user] [case]`
+
+**LEVELING**
+> • COMMAND: `leveling setup` — USAGE: `?leveling setup`
+> • COMMAND: `leveling channel` — USAGE: `?leveling channel [channel]`
+> • COMMAND: `leveling message` — USAGE: `?leveling message [message]`
+
+**LOGS**
+> • COMMAND: `logs setup` — USAGE: `?logs setup`
+> • COMMAND: `logs set` — USAGE: `?logs set [type] [channel]`
+> • COMMAND: `logs disable` — USAGE: `?logs disable`
+
+**WELCOME**
+> • COMMAND: `welcome setup` — USAGE: `?welcome setup [channel]`
+> • COMMAND: `welcome disable` — USAGE: `?welcome disable`
+
+**GENERAL**
+> • COMMAND: `role info` — USAGE: `?role info [role]`
+> • COMMAND: `role add` — USAGE: `?role add [user] [role]`
+> • COMMAND: `role remove` — USAGE: `?role remove [user] [role]`
+> • COMMAND: `role list` — USAGE: `?role list`
+> • COMMAND: `help` — USAGE: `?help`
+    </pre>
+  </section>
+
+  <section id="leveling-section" style="display:none;">
+    <h2>Leveling System</h2>
+    <p>YEPIE offers an advanced leveling system that rewards your active members with XP and ranks. Customize messages, levels, and rewards to keep your community engaged.</p>
+    <ul>
+      <li>Auto XP tracking per message</li>
+      <li>Customizable level-up messages</li>
+      <li>Role rewards on reaching levels</li>
+      <li>Leaderboards to promote competition</li>
+    </ul>
+  </section>
+
+  <section id="invite-section" style="display:none;">
+    <h2>Invite YEPIE to Your Server</h2>
+    <p>Click the button below to invite YEPIE to your Discord server and unlock all features!</p>
+    <button class="btn" onclick="window.open('https://discord.com/oauth2/authorize?client_id=1379441584575221902&scope=bot+applications.commands&permissions=8', '_blank')">Invite YEPIE</button>
+  </section>
+</main>
+
+<footer>
+  &copy; 2025 YEPIE Bot. Made with &#10084; for Discord communities.
+</footer>
+
+<script>
+  // Navigation handler
+  function navigate(e) {
+    e.preventDefault();
+    const links = document.querySelectorAll('nav a');
+    links.forEach(link => link.classList.remove('active'));
+    e.target.classList.add('active');
+
+    const sections = {
+      'home': 'home-section',
+      'commands': 'commands-section',
+      'leveling': 'leveling-section',
+      'invite': 'invite-section'
+    };
+
+    for (const key in sections) {
+      document.getElementById(sections[key]).style.display = 'none';
+    }
+    const targetSection = sections[e.target.getAttribute('href').substring(1)];
+    if (targetSection) {
+      document.getElementById(targetSection).style.display = 'block';
+    }
+  }
+
+  // Copy invite link to clipboard
+  function copyInvite() {
+    const inviteUrl = 'https://discord.com/oauth2/authorize?client_id=1379441584575221902&scope=bot+applications.commands&permissions=8';
+    navigator.clipboard.writeText(inviteUrl).then(() => {
+      alert('Invite link copied to clipboard!');
+    }).catch(() => {
+      alert('Failed to copy the invite link. Please copy manually: ' + inviteUrl);
+    });
+  }
+</script>
+
+</body>
+</html>
